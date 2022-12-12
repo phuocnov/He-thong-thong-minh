@@ -1,0 +1,71 @@
+.main {
+    background-color: #DD7E26;
+    width: 100vw;
+    height: 100vh;
+}
+
+.find-section {
+    position: absolute;
+    background-color: #f5f5f5;
+    width: 60vw;
+    height: 531px;
+    border-radius: 24px;
+    margin-left: 100px;
+    margin-top: 32px;
+}
+
+.find-section__title {
+    color: #DD7E26;
+    text-align: center;
+}
+
+.find-section__ingredients {
+    width: 50%;
+    display: grid;
+    padding-left: 5%;
+}
+
+.find-section__flavor {
+    width: 45%;
+    float: left;
+    display: grid;
+}
+
+.find-section__ingredient__selected {
+    height: 227px;
+    border: solid #000 1px;
+    border-radius: 12px;
+}
+
+.find-section__flavor__selected {
+    height: 227px;
+    border: solid #000 1px;
+    border-radius: 12px;
+}
+
+.find-button {
+    font-size: 24px;
+    margin: 0;
+    position: absolute;
+    left: 42%;
+    bottom: 10%;
+}
+
+.person-section {
+    width: 20vw;
+    height: 531px;
+    float: left;
+    position: absolute;
+    background-color: #f5f5f5;
+    left: 70%;
+    border-radius: 24px;
+    margin-top: 32px;
+}
+.person-section__container {
+    list-style-type: none;
+    align-items: center;
+}
+.person-section__item {
+    align-items: center;
+    
+}
