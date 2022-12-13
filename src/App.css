@@ -70,9 +70,11 @@
 .person-section__container {
     list-style-type: none;
     align-items: center;
+    padding: 0;
 }
 .person-section__item {
     align-items: center;
+    /* display: inline; */
 }
 
 .recomend-section {
@@ -93,4 +95,18 @@
 .recomend-section > .nav-tabs > li > button {
     /* border-bottom: 1px solid #DD7E26; */
     color: #DD7E26;
+
+.person-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-left: 40%;
+}
+.person-name {
+    font-size: 20px;
+    color: #222;
+    text-align: center;
+}
+.person-button {
+    
 }
