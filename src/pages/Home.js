@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Tab, Tabs } from 'react-bootstrap';
 import ModalFindBy from '../components/ModalFindBy';
 import CardRecipe from '../components/CardRecipe';
-
 function Home() {
     // State
     const [selectedFlavors, setSelectedFlavors] = useState([])

@@ -11,3 +11,141 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+#root {
+  width: 100%;
+  background-color: #FFF7EF;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* ---------------------------- */
+.MealForm {
+  /* margin-top: 100px; */
+  width: 50%;
+  margin: 0px auto;
+  background-color: white;
+  border-radius: 5px;
+  margin-top: 20px;
+  padding: 15px 25px;
+  /* margin-bottom: 20px; */
+}
+.form-control {
+  padding: 2px 8px;
+}
+input {
+  padding: 0px ;
+}
+.MealForm > h3 {
+  color: #DD7E26;
+  text-align: center;
+}
+.MealForm .confirm-meal-btn {
+  padding-left: 65%;
+}
+.MealForm .acpt-btn {
+  margin-left: 13%;
+  background-color: #DD7E26;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid #DD7E26;
+  opacity: 0.6;
+  
+}
+.MealForm .acpt-btn:hover {
+  opacity: 1;
+  transition:  all 0.5s ease-in-out;;
+}
+.MealForm .cancel-btn {
+  background-color: white;
+  color: #DD7E26;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid #DD7E26;
+  opacity: 0.6;
+}
+.MealForm .cancel-btn:hover {
+  opacity: 1;
+  transition:  all 0.5s ease-in-out;;
+}
+/* ---------------------------- */
+.DetailMeal {
+  width: 80%;
+  margin: 0px auto;
+  /* background-color: white; */
+  border-radius: 5px;
+  padding: 15px 25px;
+  margin-top: 20px;
+}
+.DetailMeal span {
+  
+  
+}
+.DetailMeal .inforMeal {
+  display: flex;
+  min-height: 300px;
+  background-color: white;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  padding: 10px 20px;
+}
+.left-infor {
+  width: 40%;
+}
+.left-infor img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  /* height: width; */
+}
+.left-infor p {
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+}
+.left-infor p >span {
+  margin-left: 15px;
+  
+}
+.right-infor {
+  width: 55%;
+}
+.right-infor p span {
+  padding: 5px;
+  color: white;
+  margin-left:10px;
+  background-color: #DD7E26;
+  border: 1px solid #DD7E26;
+  border-radius: 5px;
+}
+.DetailMeal .recipeMeal {
+  margin: 0px auto;
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+}
+.recipeMeal p{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+  width: 80%;
+  margin: 0px auto;
+  /* text-align: center;
+  vertical-align: middle; */
+}
+.DetailMeal i {
+  color: rgb(255, 215, 0);
+}
+.rated-infor {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+}
+.rated-infor >span {
+  margin-left: 10px;
+}

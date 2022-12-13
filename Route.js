@@ -1,6 +1,5 @@
 import Home from "./src/pages/Home"
 import Dish from "./src/pages/Dish"
-
 const myRoutes = [
     {
         path: '/',

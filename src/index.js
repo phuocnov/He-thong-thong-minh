@@ -6,16 +6,21 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import Home from './pages/Home';
-import Dish from './pages/Dish';
+import AddMealForm from './pages/AddMealForm';
+import DetailMeal from './pages/DetailMeal';
 
 const routes = createBrowserRouter([
   {
-      path: "/",
-      element: <Home/>
+    path: "/",
+    element: <Home />
   },
   {
-      path: "/dish",
-      element: <Dish/>
+    path: "/add-meal",
+    element: <AddMealForm />
+  },
+  {
+    path: "/detail-meal",
+    element: <DetailMeal />
   }
 ]);
 
