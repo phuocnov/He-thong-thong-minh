@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import './App.css';
+import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Tab, Tabs } from 'react-bootstrap';
-import ModalFindBy from './components/ModalFindBy';
-import CardRecipe from './components/CardRecipe';
+import ModalFindBy from '../components/ModalFindBy';
+import CardRecipe from '../components/CardRecipe';
 
 function Home() {
     // State
@@ -11,9 +11,6 @@ function Home() {
     const [selectedIngredient, setSelectedIngredient] = useState([])
 
     const [tab, setTab] = useState("suggest")
-    function changeTab() {
-        tab == 0 ? setTab(1) : setTab(0)
-    }
     function selectedListString(list) {
         var result = ""
         list.map((item) => {
