@@ -42,12 +42,12 @@ function Home() {
     ]
 
     const UserData = {
-        img: "",
+        img: "https://pyxis.nymag.com/v1/imgs/e6c/02c/cbe672af6609198720b69efd475ab5f641-avatar-last-airbender.2x.rsocial.w600.jpg",
         name: "Minh Quang"
     }
 
     const DishCardData = {
-        img: "",
+        img: "https://trivietphat.net/wp-content/uploads/2022/01/Tri-Viet-Phat-Top-10-loai-xot-an-kem-beefsteak-dang-cap-5-sao-1.jpg",
         name: "BÒ BEEF STEAK CỦA ĐỨC PHÚC",
         tags: ["Bò", "Đậm", "Mặn", "Ngọt"],
         rating: 3.2,
@@ -81,11 +81,11 @@ function Home() {
                 </div>
                 <div className="person-section">
                     <ul className='person-section__container'>
-                        <li className='person-section__item'><img srd={UserData.img} /></li>
-                        <li className='person-section__item'><p>{UserData.name}</p></li>
-                        <li className='person-section__item'><Button>Đổi E-mail</Button></li>
-                        <li className='person-section__item'><Button>Đăng món ăn</Button></li>
-                        <li className='person-section__item'><Button>Các món đã đăng</Button></li>
+                        <li className='person-section__item'><img src={UserData.img} className="person-avatar"/></li>
+                        <li className='person-section__item'><p className="person-name">{UserData.name}</p></li>
+                        <li className='person-section__item'><Button className="person-button" color="#FFF7EF">Đổi E-mail</Button></li>
+                        <li className='person-section__item'><Button className="person-button" color="#FFF7EF">Đăng món ăn</Button></li>
+                        <li className='person-section__item'><Button className="person-button" color="#FFF7EF">Các món đã đăng</Button></li>
                     </ul>
                 </div>
                 <div className="recomend-section">
