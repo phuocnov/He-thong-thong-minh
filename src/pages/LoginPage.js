@@ -1,6 +1,14 @@
 import React, {Component, useState} from 'react'
 import Textfield from '@atlaskit/textfield'
 export default function LoginPage() {
+    const styleButton = {
+        style1: {
+            opacity: 0.6
+        },
+        style2: {
+            opacity:1
+        }
+    }
     const [email, setEmail] = useState('');
     const [error, setError] = useState(null);
     function isValidEmail(email) {
@@ -34,7 +42,7 @@ export default function LoginPage() {
                 </div>
                 </form>
                 
-                <button type="button" disabled={!email}>Dang nhap</button>
+                <button type="button" disabled={!email} style= {email ? styleButton.style2:styleButton.style1}>Dang nhap</button>
                 <img src='logo192.png' />
         </div>
         
