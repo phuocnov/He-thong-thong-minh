@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Form, Button } from 'react-bootstrap';
+import { Button, Tab, Tabs } from 'react-bootstrap';
 import ModalFindBy from './components/ModalFindBy';
+import PersonalSuggest from './components/PersonalSuggest';
+import CardRecipe from './components/CardRecipe';
 
 function App() {
   // State
   const [selectedFlavors, setSelectedFlavors] = useState([])
   const [selectedIngredient, setSelectedIngredient] = useState([])
-  
-  const [tab, setTab] = useState(0)
+
+  const [tab, setTab] = useState("suggest")
   function changeTab() {
     tab == 0 ? setTab(1) : setTab(0)
   }
   function selectedListString(list) {
     var result = ""
-    list.map((item)=>{
-      result+= item.value + ", "
+    list.map((item) => {
+      result += item.value + ", "
     })
     return result
   }
@@ -42,10 +44,18 @@ function App() {
     { value: 'Hành lá', label: 'Hành lá' },
     { value: 'Hành tây', label: 'Hành tây' },
   ]
-  
+
   const UserData = {
     img: "",
     name: "Minh Quang"
+  }
+
+  const DishCardData = {
+    img:"",
+    name: "BÒ BEEF STEAK CỦA ĐỨC PHÚC",
+    tags: ["Bò", "Đậm", "Mặn", "Ngọt"],
+    rating: 3.2,
+    voting: 3000,
   }
 
   return (
@@ -75,7 +85,7 @@ function App() {
         </div>
         <div className="person-section">
           <ul className='person-section__container'>
-            <li className='person-section__item'><img srd={UserData.img}/></li>
+            <li className='person-section__item'><img srd={UserData.img} /></li>
             <li className='person-section__item'><p>{UserData.name}</p></li>
             <li className='person-section__item'><Button>Đổi E-mail</Button></li>
             <li className='person-section__item'><Button>Đăng món ăn</Button></li>
@@ -83,9 +93,22 @@ function App() {
           </ul>
         </div>
         <div className="recomend-section">
-          <div className="recomend-section__header">
-            
-          </div>
+          <Tabs
+            id='recomend-section__header__tabs'
+            activeKey={tab}
+            onSelect={(k) => { setTab(k) }}
+          >
+            <Tab eventKey="suggest" title="Có thể bạn thích">
+              <CardRecipe
+                imgSrc={DishCardData.img}
+                name={DishCardData.name}
+                tags={DishCardData.tags}
+                rating={DishCardData.rating}
+                voting={DishCardData.voting}
+              />
+            </Tab>
+            <Tab eventKey="trend" title="Được nhiều người thích"></Tab>
+          </Tabs>
         </div>
       </body>
     </div>
