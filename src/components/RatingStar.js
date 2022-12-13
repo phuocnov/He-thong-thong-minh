@@ -1,10 +1,8 @@
 import ReactStars from "react-rating-stars-component";
 import React from 'react'
-import styled from 'styled-components'
-import Rating from 'react-rating'
 import { useCallback, useState } from "react";
 
-export default function RatingStar({ratingStar}) {
+export default function RatingStar({ratingStar, onChangeHandler}) {
     const [rate,setRate] = useState(0);
     const secondExample = {
         size: 20,
@@ -18,7 +16,7 @@ export default function RatingStar({ratingStar}) {
         halfIcon: <i className="fa fa-star-half-alt" />,
         filledIcon: <i className="fa fa-star" />,
         onChange: newValue => {
-          setRate(newValue);
+          onChangeHandler(newValue)
         }
       };
   return (

@@ -15,10 +15,9 @@ import {
 import Home from './pages/Home';
 
 /****************************/
-import AddMealForm from "./components/AddMealForm";
 import { useCallback } from "react";
 import { v4 } from 'uuid';
-import DetailMeal from "./components/DetailMeal" 
+import DetailMeal from "./pages/DetailMeal" 
 /****************************/
 function App() {
   
@@ -29,7 +28,6 @@ function App() {
           <Route path='/' exact component={Home}/>
         </div>
       </Router>
-      <AddMealForm  />
       <DetailMeal/>
     </>
     
