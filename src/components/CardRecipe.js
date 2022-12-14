@@ -1,15 +1,22 @@
 import React from "react"
-import {Card, Button} from "react-bootstrap"
+import { Card } from "react-bootstrap"
 import ReactStars from "react-rating-stars-component"
+import { useNavigate } from "react-router"
+import './CardRecipe.css'
 
-function CardRecipe(props){
+function CardRecipe(props) {
+    const navigate = useNavigate()
     return (
-        <Card style={{width:"15vw"}}>
-            <Card.Img className="image" src={props.imgSrc}/>
+        <Card className="card" onClick={()=>navigate('/detail-meal', {state: {
+            id: props.dishId
+        }})}>
+            <Card.Img className="image" src={props.imgSrc} />
             <Card.Title className="title">{props.name}</Card.Title>
-            {props.tags.map((tag, index)=>{
-                return <Button key={"tag-"+index} className="tag" disabled={true}>{tag}</Button>
-            })}
+            <Card.Body>
+                {props.tags.map((tag, index) => {
+                    return <div key={"tag-" + index} className="tag">{tag}</div>
+                })}
+            </Card.Body>
             <p className="rating">{"Đánh giá " + props.voting + " lượt"}</p>
             <ReactStars
                 count={5}

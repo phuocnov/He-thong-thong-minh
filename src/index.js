@@ -10,6 +10,8 @@ import AddMealForm from './pages/AddMealForm';
 import DetailMeal from './pages/DetailMeal';
 import LoginPage from './pages/LoginPage';
 import GetGuestName from './pages/GetGuestName';
+import SearchResult from './pages/SearchResult';
+
 const routes = createBrowserRouter([
   {
     path: "/",
@@ -31,6 +33,10 @@ const routes = createBrowserRouter([
   {
     path: "/get-guestname",
     element: <GetGuestName />
+  },
+  {
+    path: "/search-result",
+    element: <SearchResult/>
   }
 ]);
 
