@@ -1,0 +1,32 @@
+.search {
+    background: #FFF7EF;
+    width: 100vw;
+    height: 100vh;
+}
+
+.selected-options {
+    position: absolute;
+    background-color: #f2f2f2;
+    width: 300px;
+    height: 365px;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.options-tags {
+    color: #fff;
+    background-color: #DD7E26;
+    width: 50px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.selected-category {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+
+    /* Primary color */
+
+    color: #DD7E26;
+}
