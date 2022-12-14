@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Tab, Tabs } from 'react-bootstrap';
 import ModalFindBy from '../components/ModalFindBy';
 import CardRecipe from '../components/CardRecipe';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 
 function Home() {
     const navigate = useNavigate()
@@ -26,6 +26,12 @@ function Home() {
     }
 
     // Test Data
+    const {state} = useLocation()
+    const [newguest,setNewGuest] = useState([])
+    useEffect(()=> {
+        setNewGuest(state.name.name);
+        console.log(newguest)
+    })
     const FlavorsData = [
         { value: 'Mặn', label: 'Mặn' },
         { value: 'Ngọt', label: 'Ngọt' },
@@ -49,7 +55,7 @@ function Home() {
 
     const UserData = {
         img: "https://pyxis.nymag.com/v1/imgs/e6c/02c/cbe672af6609198720b69efd475ab5f641-avatar-last-airbender.2x.rsocial.w600.jpg",
-        name: "Minh Quang"
+        name: newguest
     }
 
     const DishCardData = {

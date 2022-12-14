@@ -18,6 +18,7 @@ import Home from './pages/Home';
 import { useCallback } from "react";
 import { v4 } from 'uuid';
 import DetailMeal from "./pages/DetailMeal" 
+import LoginPage from './pages/LoginPage';
 /****************************/
 function App() {
   
@@ -25,7 +26,7 @@ function App() {
     <>
       <Router>
         <div className='App'>
-          <Route path='/' exact component={Home}/>
+          <Route path='/' exact component={<LoginPage/>}/>
         </div>
       </Router>
       <DetailMeal/>

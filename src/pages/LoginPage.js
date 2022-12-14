@@ -1,6 +1,8 @@
 import React, {Component, useState} from 'react'
 import Textfield from '@atlaskit/textfield'
+import { useNavigate, useParams } from 'react-router-dom';
 export default function LoginPage() {
+    const navigate = useNavigate()
     const styleButton = {
         style1: {
             opacity: 0.6
@@ -8,6 +10,11 @@ export default function LoginPage() {
         style2: {
             opacity:1
         }
+    }
+    const savedEmail = ['abc@gmail.com']
+    const  isFirstTime =(email) => {
+      if(savedEmail.includes(email)) return true;
+      return false;
     }
     const [email, setEmail] = useState('');
     const [error, setError] = useState(null);
@@ -21,15 +28,18 @@ export default function LoginPage() {
         } else {
           setError(null);
         }    
-        setEmail(event.target.value);
+        setEmail(event.target.value); 
       };
-
+      // const handleSubmit = event => {
+      //   navigate("/home")
+      // }
     return (
     <>  
        
         <div className='login'>
                 <h3>Dang nhap</h3>
-                <form>
+                {/*  onSubmit={handleSubmit} */}
+                <form > 
                 <div className="mb-3">
                         <label  className="form-label">Nhap email</label>
                         <Textfield 
@@ -42,7 +52,15 @@ export default function LoginPage() {
                 </div>
                 </form>
                 
-                <button type="button" disabled={!email} style= {email ? styleButton.style2:styleButton.style1}>Dang nhap</button>
+                <button 
+                  type="button" 
+                  disabled={!email || !isValidEmail(email)} 
+                  style= {(email && isValidEmail(email)) ? styleButton.style2:styleButton.style1}
+                  onClick = {()=> {
+                    if(isFirstTime(email)) navigate("/home")
+                    else navigate("/get-guestname")
+                  }}
+                >Dang nhap</button>
                 <img src='logo192.png' />
         </div>
         

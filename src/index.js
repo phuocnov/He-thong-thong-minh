@@ -14,7 +14,7 @@ import SearchResult from './pages/SearchResult';
 
 const routes = createBrowserRouter([
   {
-    path: "/",
+    path: "/home",
     element: <Home />
   },
   {
@@ -26,7 +26,7 @@ const routes = createBrowserRouter([
     element: <DetailMeal />
   },
   {
-    path: "/login-page",
+    path: "/",
     element: <LoginPage />
   }
   ,
