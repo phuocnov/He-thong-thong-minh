@@ -4,7 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Tab, Tabs } from 'react-bootstrap';
 import ModalFindBy from '../components/ModalFindBy';
 import CardRecipe from '../components/CardRecipe';
+import { useNavigate } from "react-router-dom";
+
 function Home() {
+    const navigate = useNavigate()
     // State
     const [selectedFlavors, setSelectedFlavors] = useState([])
     const [selectedIngredient, setSelectedIngredient] = useState([])
@@ -16,6 +19,10 @@ function Home() {
             result += item.value + ", "
         })
         return result
+    }
+
+    const findDish = () => {
+        navigate('/search-result', { state: { flavors: selectedFlavors, ingredients: selectedIngredient } })
     }
 
     // Test Data
@@ -46,6 +53,7 @@ function Home() {
     }
 
     const DishCardData = {
+        id: 1,
         img: "https://trivietphat.net/wp-content/uploads/2022/01/Tri-Viet-Phat-Top-10-loai-xot-an-kem-beefsteak-dang-cap-5-sao-1.jpg",
         name: "BÒ BEEF STEAK CỦA ĐỨC PHÚC",
         tags: ["Bò", "Đậm", "Mặn", "Ngọt"],
@@ -73,18 +81,15 @@ function Home() {
                         </div>
                     </div>
 
-                    <Button color='#DD7E26' className="find-button" onClick={() => {
-                        setSelectedFlavors([]);
-                        setSelectedIngredient([]);
-                    }}>Tìm Kiếm</Button>
+                    <Button color='#DD7E26' className="find-button" onClick={findDish}>Tìm Kiếm</Button>
                 </div>
                 <div className="person-section">
                     <ul className='person-section__container'>
-                        <li className='person-section__item'><img src={UserData.img} className="person-avatar"/></li>
+                        <li className='person-section__item'><img src={UserData.img} className="person-avatar" /></li>
                         <li className='person-section__item'><p className="person-name">{UserData.name}</p></li>
-                        <li className='person-section__item'><Button className="person-button" color="#FFF7EF">Đổi E-mail</Button></li>
-                        <li className='person-section__item'><Button className="person-button" color="#FFF7EF">Đăng món ăn</Button></li>
-                        <li className='person-section__item'><Button className="person-button" color="#FFF7EF">Các món đã đăng</Button></li>
+                        <li className='person-section__item'><button className="person-button">Đổi E-mail</button></li>
+                        <li className='person-section__item'><button className="person-button">Đăng món ăn</button></li>
+                        <li className='person-section__item'><button className="person-button">Các món đã đăng</button></li>
                     </ul>
                 </div>
                 <div className="recomend-section">
@@ -95,6 +100,7 @@ function Home() {
                     >
                         <Tab eventKey="suggest" title="Có thể bạn thích">
                             <CardRecipe
+                                dishId={DishCardData.id}
                                 imgSrc={DishCardData.img}
                                 name={DishCardData.name}
                                 tags={DishCardData.tags}

@@ -2,12 +2,12 @@ import React, { Component, useState } from 'react'
 import TasteList from '../components/TasteList'
 import RatedStar from '../components/RatedStar'
 import ReactStars from "react-rating-stars-component"
+import { useLocation } from 'react-router'
 
 export default function DetailMeal() {
-    const detailMealData = {
-
-    }
-
+    const {state} = useLocation()
+    console.log(state)
+    
     const tasteList = ['chua', 'cay'];
     const materialList = ['thit', 'ca'];
     const date = 'xx/yy/mm';
