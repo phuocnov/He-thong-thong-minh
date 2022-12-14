@@ -8,6 +8,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './pages/Home';
 import AddMealForm from './pages/AddMealForm';
 import DetailMeal from './pages/DetailMeal';
+import LoginPage from './pages/LoginPage';
+import GetGuestName from './pages/GetGuestName';
 import SearchResult from './pages/SearchResult';
 
 const routes = createBrowserRouter([
@@ -22,6 +24,15 @@ const routes = createBrowserRouter([
   {
     path: "/detail-meal",
     element: <DetailMeal />
+  },
+  {
+    path: "/login-page",
+    element: <LoginPage />
+  }
+  ,
+  {
+    path: "/get-guestname",
+    element: <GetGuestName />
   },
   {
     path: "/search-result",
