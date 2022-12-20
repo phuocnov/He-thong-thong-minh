@@ -1,13 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Tab, Tabs } from 'react-bootstrap';
 import ModalFindBy from '../components/ModalFindBy';
 import CardRecipe from '../components/CardRecipe';
 import { useNavigate } from "react-router-dom";
+import getApi from '../api/getApi';
 
 function Home() {
     const navigate = useNavigate()
+    // Data
+    const [userData, setUserData] = useState({})
+    const [flavors, setFlavor] = useState({})
+    const [ingredients, setIngredients] = useState({})
+    useEffect(() => {
+        async function getFlavors() {
+            try {
+                const rawData = await getApi.getTasteType()
+                var newData = []
+                rawData.data.data.map((flavor)=>{
+                    newData.push({value: flavor, label: flavor})
+                })
+                setFlavor(newData)
+                console.log(newData)
+            }
+            catch (err) {
+                throw err;
+            }
+        }
+        async function getIngredients() {
+            try {
+                const rawData = await getApi.getSavour()
+                var newData = []
+                rawData.data.data.map((ingredients)=>{
+                    newData.push({value: ingredients.name, label: ingredients.name})
+                })
+                setIngredients(newData)
+                console.log(newData)
+            }
+            catch (err) {
+                throw err;
+            }
+        }
+        
+        async function getUserInfo() {
+            try {
+                const data = await getApi.getUser()
+            }
+            catch(err){
+                throw err;
+            }
+        }
+        getFlavors();
+        getIngredients();
+    }, [])
     // State
     const [selectedFlavors, setSelectedFlavors] = useState([])
     const [selectedIngredient, setSelectedIngredient] = useState([])
@@ -24,28 +70,6 @@ function Home() {
     const findDish = () => {
         navigate('/search-result', { state: { flavors: selectedFlavors, ingredients: selectedIngredient } })
     }
-
-    // Test Data
-    const FlavorsData = [
-        { value: 'Mặn', label: 'Mặn' },
-        { value: 'Ngọt', label: 'Ngọt' },
-        { value: 'Đắng', label: 'Đắng' },
-        { value: 'Chua', label: 'Chua' },
-        { value: 'Cay', label: 'Cay' },
-        { value: 'Đậm', label: 'Đậm' },
-        { value: 'Thanh', label: 'Thanh' },
-    ]
-
-    const IngredientsData = [
-        { value: 'Thịt Heo', label: 'Thịt heo' },
-        { value: 'Thịt Bò', label: 'Thịt bò' },
-        { value: 'Xà lách', label: 'Xà lách' },
-        { value: 'Chanh', label: 'Chanh' },
-        { value: 'Cà chua', label: 'Cà chua' },
-        { value: 'Khoai tây', label: 'Khoai tây' },
-        { value: 'Hành lá', label: 'Hành lá' },
-        { value: 'Hành tây', label: 'Hành tây' },
-    ]
 
     const UserData = {
         img: "https://pyxis.nymag.com/v1/imgs/e6c/02c/cbe672af6609198720b69efd475ab5f641-avatar-last-airbender.2x.rsocial.w600.jpg",
@@ -68,14 +92,14 @@ function Home() {
                     <h2 className="find-section__title">Cùng tìm ra món ăn yêu thích của bạn</h2>
                     <div className="find-section__flavor">
                         <h3>Chọn hương vị</h3>
-                        <ModalFindBy optionsData={FlavorsData} setDataState={setSelectedFlavors} dataState={selectedFlavors}></ModalFindBy>
+                        <ModalFindBy optionsData={flavors} setDataState={setSelectedFlavors} dataState={selectedFlavors}></ModalFindBy>
                         <div className='find-section__flavor__selected'>
                             <p>{selectedListString(selectedFlavors)}</p>
                         </div>
                     </div>
                     <div className="find-section__ingredients">
                         <h3>Chọn nguyên liệu</h3>
-                        <ModalFindBy optionsData={IngredientsData} setDataState={setSelectedIngredient} dataState={selectedIngredient}></ModalFindBy>
+                        <ModalFindBy optionsData={ingredients} setDataState={setSelectedIngredient} dataState={selectedIngredient}></ModalFindBy>
                         <div className='find-section__ingredient__selected'>
                             <p>{selectedListString(selectedIngredient)}</p>
                         </div>

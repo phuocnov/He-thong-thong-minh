@@ -16,9 +16,10 @@
 .options-tags {
     color: #fff;
     background-color: #DD7E26;
-    width: 50px;
+    width: 80%;
     text-align: center;
     border-radius: 10px;
+    margin: 10px;
 }
 
 .selected-category {
@@ -27,6 +28,32 @@
     line-height: 28px;
 
     /* Primary color */
-
     color: #DD7E26;
+}
+
+.selected-result {
+    position: absolute;
+    width: 60vw;
+    left: 20vw;
+}
+
+.result-container {
+    height: 225px;
+    width: 930px;
+    background-color: #f2f2f2;
+    margin-top: 30px;
+}
+
+.result-image {
+    width: 193px;
+    height: 222px;
+}
+
+.result-title {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 33px;
+    color: #222;
 }

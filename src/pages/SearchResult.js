@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react"
 import { Button } from "react-bootstrap"
+import ReactStars from "react-rating-stars-component"
 import { useLocation, useNavigate } from "react-router"
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import './SearchResult.css'
 function SearchResult() {
     const navigate = useNavigate()
@@ -15,6 +19,7 @@ function SearchResult() {
                 "Tiêu đen",
                 "Nước mắm"
             ],
+            recipe: "",
             rating: 4.3,
             voting: 1200
         },
@@ -27,6 +32,7 @@ function SearchResult() {
                 "Tiêu đen",
                 "Nước mắm"
             ],
+            recipe: "",
             rating: 4.3,
             voting: 1200
         },
@@ -39,6 +45,7 @@ function SearchResult() {
                 "Tiêu đen",
                 "Nước mắm"
             ],
+            recipe: "",
             rating: 4.3,
             voting: 1200
         },
@@ -67,15 +74,34 @@ function SearchResult() {
                 })}
                 <Button onClick={() => { navigate('/') }}>Trở về trang trước</Button>
             </div>
-            <div className="selected-result">
+            <Container className="selected-result">
                 {results.map((result, index) => {
-                    return <div className="result-container" key={'result' + index}>
-                        <img className="result-image"></img>
-                        <p className="result-title">{result.dishName}</p>
-                        
-                    </div>
+                    return <Row className="result-container" key={'result' + index} onClick={() => {
+                        navigate('/detail-meal', {
+                            state: {}
+                        })
+                    }}>
+                        <Col>
+                            <img className="result-image" src={result.img}></img>
+                        </Col>
+                        <Col xs={9}>
+                            <p className="result-title">{result.dishName}</p>
+                            <p>{"Nguyên liệu: " + result.ingredients.map((ingredient) => { return ingredient + ', ' })}</p>
+                            <p>{"Công thức: " + result.recipe}</p>
+                            <p>
+                                {"Đánh giá: " + result.voting}
+                                <ReactStars
+                                    count={5}
+                                    value={result.rating}
+                                    activeColor="#FFC403"
+                                    size={20}
+                                    edit={false}
+                                />
+                            </p>
+                        </Col>
+                    </Row>
                 })}
-            </div>
+            </Container>
         </div>
     )
 }
