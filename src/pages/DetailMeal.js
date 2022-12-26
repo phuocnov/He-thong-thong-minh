@@ -6,7 +6,6 @@ import { useLocation } from 'react-router'
 
 export default function DetailMeal() {
     const {state} = useLocation()
-    console.log(state)
     
     const tasteList = ['chua', 'cay'];
     const materialList = ['thit', 'ca'];

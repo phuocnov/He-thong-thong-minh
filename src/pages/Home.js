@@ -4,22 +4,25 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Tab, Tabs } from 'react-bootstrap';
 import ModalFindBy from '../components/ModalFindBy';
 import CardRecipe from '../components/CardRecipe';
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import getApi from '../api/getApi';
 
 function Home() {
+    const { state } = useLocation()
     const navigate = useNavigate()
     // Data
     const [userData, setUserData] = useState({})
     const [flavors, setFlavor] = useState({})
     const [ingredients, setIngredients] = useState({})
+
+    const [dish, setDish] = useState([])
     useEffect(() => {
         async function getFlavors() {
             try {
                 const rawData = await getApi.getTasteType()
                 var newData = []
-                rawData.data.data.map((flavor)=>{
-                    newData.push({value: flavor, label: flavor})
+                rawData.data.data.map((flavor) => {
+                    newData.push({ value: flavor, label: flavor })
                 })
                 setFlavor(newData)
                 console.log(newData)
@@ -32,8 +35,8 @@ function Home() {
             try {
                 const rawData = await getApi.getSavour()
                 var newData = []
-                rawData.data.data.map((ingredients)=>{
-                    newData.push({value: ingredients.name, label: ingredients.name})
+                rawData.data.data.map((ingredients) => {
+                    newData.push({ value: ingredients.name, label: ingredients.name })
                 })
                 setIngredients(newData)
                 console.log(newData)
@@ -42,17 +45,18 @@ function Home() {
                 throw err;
             }
         }
-        
-        async function getUserInfo() {
+
+        async function getFood() {
             try {
-                const data = await getApi.getUser()
-            }
-            catch(err){
-                throw err;
+                const { data } = await getApi.getFood(10)
+                setDish(data.data)
+            } catch (error) {
+                throw error
             }
         }
         getFlavors();
         getIngredients();
+        getFood();
     }, [])
     // State
     const [selectedFlavors, setSelectedFlavors] = useState([])
@@ -73,7 +77,7 @@ function Home() {
 
     const UserData = {
         img: "https://pyxis.nymag.com/v1/imgs/e6c/02c/cbe672af6609198720b69efd475ab5f641-avatar-last-airbender.2x.rsocial.w600.jpg",
-        name: "Minh Quang"
+        name: state.name
     }
 
     const DishCardData = {
@@ -123,14 +127,20 @@ function Home() {
                         onSelect={(k) => { setTab(k) }}
                     >
                         <Tab eventKey="suggest" title="Có thể bạn thích">
-                            <CardRecipe
-                                dishId={DishCardData.id}
-                                imgSrc={DishCardData.img}
-                                name={DishCardData.name}
-                                tags={DishCardData.tags}
-                                rating={DishCardData.rating}
-                                voting={DishCardData.voting}
-                            />
+                            <div>
+                                {dish.map((food, index) => {
+                                    return <CardRecipe
+                                        dishId={food.id}
+                                        imgSrc={food.img}
+                                        name={food.name}
+                                        tags={food.savours_name}
+                                        rating={food.rating.avg_rating}
+                                        voting={food.rating.total_rating}
+                                        key={index}
+                                    />
+                                })}
+
+                            </div>
                         </Tab>
                         <Tab eventKey="trend" title="Được nhiều người thích"></Tab>
                     </Tabs>

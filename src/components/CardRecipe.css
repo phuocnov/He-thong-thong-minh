@@ -1,6 +1,7 @@
 .card {
     width: 193px;
     margin: 10px;
+    display: inline-block;
 }
 
 .tag {

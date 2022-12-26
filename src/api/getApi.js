@@ -24,5 +24,8 @@ export default {
     },
     yourRating: (email) => {
         return api.get(`https://swifts-meln.alwaysdata.net/ssystem/your-ratings?email=${email}`)
+    },
+    findFood: (taste_type, savour, limit) => {
+        return api.get(`https://swifts-meln.alwaysdata.net/ssystem/foods?taste_type=${taste_type}&limit=${limit}&savours=${savour}`)
     }
 }
