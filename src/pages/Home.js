@@ -111,7 +111,7 @@ function Home() {
 
     const UserData = {
         img: "https://pyxis.nymag.com/v1/imgs/e6c/02c/cbe672af6609198720b69efd475ab5f641-avatar-last-airbender.2x.rsocial.w600.jpg",
-        name: ""
+        name: state.userdata.name
     }
 
     return (
@@ -151,7 +151,7 @@ function Home() {
                             flavors: flavors,
                             ingredients: ingredients
                         }})}}>Đăng món ăn</button></li>
-                        <li className='person-section__item'><button className="person-button">Các món đã đăng</button></li>
+                        {/* <li className='person-section__item'><button className="person-button">Các món đã đăng</button></li> */}
                     </ul>
                 </div>
                 

@@ -10,8 +10,12 @@ export default function GetGuestName() {
 
     async function submit() {
         try {
-            const {data} = await getApi.updateUserName(state.email, name)
-            navigate("/home", {state: {email: state.email, name: name}})
+            const check = await getApi.updateUserName(state.email, name)
+            const {data} = await getApi.getUser(state.email)
+            console.log(data.data[0])
+            navigate("/home", {state: {
+                userdata: data.data[0]
+            }})                
         } catch (error) {
             throw error
         }
