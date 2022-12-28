@@ -11,11 +11,12 @@ function Home() {
     const { state } = useLocation()
     const navigate = useNavigate()
     // Data
-    const [userData, setUserData] = useState({})
     const [flavors, setFlavor] = useState({})
     const [ingredients, setIngredients] = useState({})
 
     const [dish, setDish] = useState([])
+    const [searchResult, setSearchResult] = useState([])
+    const [maybeYouLike, setMaybeYouLike] = useState([])
     useEffect(() => {
         async function getFlavors() {
             try {
@@ -54,9 +55,21 @@ function Home() {
                 throw error
             }
         }
+        
+        async function getSuggestFood() {
+            try {
+                const { data } = await getApi.maybeYouLike(state.userdata.id, 10)
+                setMaybeYouLike(data.data)
+                console.log(maybeYouLike)
+            } catch (error) {
+                throw error
+            }
+        }
+        console.log(state.userdata)
+        getFood();
         getFlavors();
         getIngredients();
-        getFood();
+        getSuggestFood();
     }, [])
     // State
     const [selectedFlavors, setSelectedFlavors] = useState([])
@@ -71,27 +84,40 @@ function Home() {
         return result
     }
 
+    async function find(taste_type, savours_name, limit) {
+        try {
+            const result = await getApi.findFood(taste_type, savours_name, limit)
+            setSearchResult(result)
+        } catch (err) {
+            throw err
+        }
+    }
     const findDish = () => {
-        navigate('/search-result', { state: { flavors: selectedFlavors, ingredients: selectedIngredient } })
+        var flavorsStr = []
+        var savoursStr = []
+
+        selectedFlavors.map((flavor) => {
+            flavorsStr.push(flavor.value)
+        })
+        selectedIngredient.map((ingredient) => {
+            savoursStr.push(ingredient.value)
+        })
+
+        find(flavorsStr, savoursStr, 10).then(() => {
+            if (searchResult.data.data != undefined)
+                navigate('/search-result', { state: { flavors: selectedFlavors, ingredients: selectedIngredient, dishes: searchResult.data.data, userdata: state.userdata } })
+        });
     }
 
     const UserData = {
         img: "https://pyxis.nymag.com/v1/imgs/e6c/02c/cbe672af6609198720b69efd475ab5f641-avatar-last-airbender.2x.rsocial.w600.jpg",
-        name: state.name
-    }
-
-    const DishCardData = {
-        id: 1,
-        img: "https://trivietphat.net/wp-content/uploads/2022/01/Tri-Viet-Phat-Top-10-loai-xot-an-kem-beefsteak-dang-cap-5-sao-1.jpg",
-        name: "BÒ BEEF STEAK CỦA ĐỨC PHÚC",
-        tags: ["Bò", "Đậm", "Mặn", "Ngọt"],
-        rating: 3.2,
-        voting: 3000,
+        name: ""
     }
 
     return (
         <div className="main">
             <body>
+                
                 <div className="find-section">
                     <h2 className="find-section__title">Cùng tìm ra món ăn yêu thích của bạn</h2>
                     <div className="find-section__flavor">
@@ -109,40 +135,72 @@ function Home() {
                         </div>
                     </div>
 
-                    <Button color='#DD7E26' className="find-button" onClick={findDish}>Tìm Kiếm</Button>
+                    <Button color='#DD7E26' className="find-button" onClick={() => {
+                        findDish()
+                    }}>Tìm Kiếm</Button>
                 </div>
                 <div className="person-section">
                     <ul className='person-section__container'>
                         <li className='person-section__item'><img src={UserData.img} className="person-avatar" /></li>
                         <li className='person-section__item'><p className="person-name">{UserData.name}</p></li>
-                        <li className='person-section__item'><button className="person-button">Đổi E-mail</button></li>
-                        <li className='person-section__item'><button className="person-button">Đăng món ăn</button></li>
+                        <li className='person-section__item'><button className="person-button" onClick={()=>{
+                            navigate('/')
+                        }}>Đổi E-mail</button></li>
+                        <li className='person-section__item'><button className="person-button" onClick={()=> {navigate('/add-meal', {state: {
+                            userdata: state.userdata,
+                            flavors: flavors,
+                            ingredients: ingredients
+                        }})}}>Đăng món ăn</button></li>
                         <li className='person-section__item'><button className="person-button">Các món đã đăng</button></li>
                     </ul>
                 </div>
+                
+                
+                
                 <div className="recomend-section">
-                    <Tabs
+                    <Tabs 
                         id='recomend-section__header__tabs'
                         activeKey={tab}
                         onSelect={(k) => { setTab(k) }}
                     >
-                        <Tab eventKey="suggest" title="Có thể bạn thích">
-                            <div>
+                        <Tab eventKey="suggest" title="Được nhiều người thích">
+                            <div className='cover_item'>
                                 {dish.map((food, index) => {
                                     return <CardRecipe
                                         dishId={food.id}
-                                        imgSrc={food.img}
+                                        img={food.img}
                                         name={food.name}
-                                        tags={food.savours_name}
+                                        savours_name={food.savours_name}
+                                        taste_type={food.taste_type}
                                         rating={food.rating.avg_rating}
                                         voting={food.rating.total_rating}
+                                        created_at={food.created_at}
                                         key={index}
+                                        userdata={state.userdata}
                                     />
                                 })}
 
                             </div>
                         </Tab>
-                        <Tab eventKey="trend" title="Được nhiều người thích"></Tab>
+                        <Tab eventKey="trend" title="Có thể bạn thích">
+                        <div className='cover_item'>
+                                {maybeYouLike.map((food, index) => {
+                                    return <CardRecipe
+                                        dishId={food.id}
+                                        img={food.img}
+                                        name={food.name}
+                                        savours_name={food.savours_name}
+                                        taste_type={food.taste_type}
+                                        rating={food.rating.avg_rating}
+                                        voting={food.rating.total_rating}
+                                        created_at={food.created_at}
+                                        key={index}
+                                        userdata={state.userdata}
+                                    />
+                                })}
+
+                            </div>
+                        </Tab>
                     </Tabs>
                 </div>
             </body>

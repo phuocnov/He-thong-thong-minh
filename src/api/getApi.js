@@ -27,5 +27,11 @@ export default {
     },
     findFood: (taste_type, savour, limit) => {
         return api.get(`https://swifts-meln.alwaysdata.net/ssystem/foods?taste_type=${taste_type}&limit=${limit}&savours=${savour}`)
+    },
+    maybeYouLike: (id, limit) => {
+        return api.get(`	https://swifts-meln.alwaysdata.net/ssystem/foods?&limit=${limit}&?user_id=${id}`)   
+    },
+    postNewMeal: (meal) => {
+        return api.post('https://swifts-meln.alwaysdata.net/ssystem/create-food', meal)
     }
 }

@@ -3,16 +3,18 @@ import TasteList from '../components/TasteList'
 import RatedStar from '../components/RatedStar'
 import ReactStars from "react-rating-stars-component"
 import { useLocation } from 'react-router'
+import api from '../api/api'
+import getApi from '../api/getApi'
 
 export default function DetailMeal() {
     const {state} = useLocation()
-    
-    const tasteList = ['chua', 'cay'];
-    const materialList = ['thit', 'ca'];
-    const date = 'xx/yy/mm';
-    const author = 'nobita';
-    const ratedStar = 2.5;
-    const ratedNumber = '15k';
+    console.log(state)
+    const tasteList = state.taste_type;
+    const materialList = state.savours_name;
+    const date = state.created_at;
+    const author = 'admin';
+    const ratedStar = state.rating;
+    const ratedNumber = state.voting;
     var recipe = '';
     if (recipe == '') {
         recipe = 'Hien chua co cong thuc nao ';
@@ -20,21 +22,22 @@ export default function DetailMeal() {
     return (
         <>
             <div className='DetailMeal'>
+                
                 <div className='inforMeal'>
                     <div className='left-infor'>
-                        <img src='logo192.png' />
+                        <img src={state.img} />
                         <p>Danh gia cua ban <span>
                             <ReactStars
                                 count={5}
                                 value={ratedStar}
                                 activeColor="#FFC403"
                                 size={20}
-                                onChange={(newRating)=>{console.log(newRating)}}
+                                onChange={(newRating)=>{getApi.upsertUserRating(state.userdata.email, newRating, state.id)}}
                             />
                         </span></p>
                     </div>
                     <div className='right-infor'>
-                        <h3>AHIHI</h3>
+                        <h3>{state.name}</h3>
                         <p>Huong vi <TasteList tasteList={tasteList} /> </p>
                         <p>Nguyen Lieu {materialList.toString()}</p>
                         <p>Ngay them {date}</p>

@@ -31,12 +31,14 @@ export default function LoginPage() {
   async function handleLogin(input) {
     try {
       const {data} = await getApi.getUser(input)
-      console.log(data)
+      console.log(data.data[0])
       if(data.data[0] == undefined) {
         navigate("/get-guestname", {state: {email: input}})
       }
       else {
-        navigate("/home", {state: data})
+        navigate("/home", {state: {
+          userdata: data.data[0]
+        }})
       }
     } catch (error) {
       throw error
